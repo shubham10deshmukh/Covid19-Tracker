@@ -5,6 +5,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import './App.css';
 
 import CanvasJSReact from './canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -61,50 +62,16 @@ this.state = {
   }
   
 
-  StateChartParameter() {
-   if(this.state.selectedStateData)
-   var segment = 0;
-   {   segment=[
-      {
-          color: '#ff9e62',
-          name : 'Active',
-          value: parseInt(this.state.selectedStateData.active)
-      },
-      {
-          color: '#f71100',
-          name : 'Death',
-          value: parseInt(this.state.selectedStateData.deaths)
-      },
-      {
-          color: '#fbff08',
-          name : 'Recovered',
-          value: parseInt(this.state.selectedStateData.recovered)
-      }
-  ]
-}
-return segment;
  
- }
       DropdownListVal(){
         if(this.state.items != [])
         { 
           return  this.optionsData();
         }
         else
-          
         return [  { value: 'MH', label: 'Maharashtra' },];
-        //   { value: 'UP', label: 'Uttar Pradesh' },
-          /*{
-          type: 'group', name: 'group1', items: [
-            { value: 'three', label: 'Three' },
-            { value: 'four', label: 'Four' }
-          ]
-          },*/ // Commented Just in case I need groups
-        
-        //];
-      
-
       } 
+
       _onSelect(e){
        
         const chartItems = this.state.items.map((d) =>  {
@@ -121,6 +88,7 @@ return segment;
         }
          });
       };
+
       optionsData(){
           const chartItems = this.state.items.map((d) =>  {
             let chartdata = {value : d.statecode  , label:  d.state  }
@@ -128,6 +96,7 @@ return segment;
           return (chartItems);
 
       }
+
       calculatePercenatge(numerator, denominator)
       {
         var result= 0;
@@ -169,97 +138,95 @@ return segment;
 				indexLabel: "{name}: {y}",
         yValueFormatString: "###'%'",
 				dataPoints: [
-          { color:"grey",name: "No Cases",visible : 'false', y:  confirmed == 0 ? 100 : 0},
-          { color:"red",name: "Deaths", y:  deaths == 0 ? "0": parseInt(this.calculatePercenatge(deaths,confirmed))},
-					{ color:"green",name: "Recovered", y: recovered == 0 ? 0:parseInt(this.calculatePercenatge(recovered,confirmed)) },
-					{ color:"yellow",name: "Active", y: active == 0 ? 0: parseInt(this.calculatePercenatge(active,confirmed)) }
+          //{ color:"grey",name: "No Cases",visible : 'false', y:  confirmed == 0 ? 100 : 0},
+          { color:"#a6a6a6",name: "Deaths", y:  deaths == 0 ? "0": parseInt(this.calculatePercenatge(deaths,confirmed))},
+					{ color:"#00cc2c",name: "Recovered", y: recovered == 0 ? 0:parseInt(this.calculatePercenatge(recovered,confirmed)) },
+					{ color:"#ff0000",name: "Active", y: active == 0 ? 0: parseInt(this.calculatePercenatge(active,confirmed)) }
 				]
       }]
 		}
-  // if (confirmed != 0 && options != {})
-  // {var chart = new CanvasJS.chart(options) //CanvasJS.Chart(options);
-  //   chart.options.data.forEach(element => {
-  //     element.name == "No Cases" ? element.visible = false : element.visible = true ;
-  //   });
-  // }
- //----------------------------------------------------------  
+    
+ //----------------------------------------------------------   bg="secondary">   bg="warning" bg="success"bg="danger"
+ 
+          var styleDDL =
+          { 
+          "position" : "relative",
+          "width" : "100%",
+            "bottom": "0",
+            "left": "0",
+          "border":"solid",
+          "color": "rebeccapurple",
+          "font-weight": "900"
+          
+        }
       return (
          this.state.selectedStateData != {} ?
-        <Container className="p-1">
-         <h1 className="header">Track COVID-19 here</h1>
-          {/* <Jumbotron> */}
-          <Dropdown options={this.DropdownListVal()} onChange={this._onSelect.bind(this)} value={this.state.selectedState} placeholder="Select Indian State" />
-          <div style={{width: "100%" }}>
-                 {/* <DonutChart loaded={this.state.isLoaded} param={this.StateChartParameter()} />  */}
-                 <CanvasJSChart options = {options}/>
+        <Container style={{border:"solid 1px", paddingTop: "1%", paddingBottom: "1%",marginTop: "1%",}}>
+
+        <div className="row" style={{ width:"inherit"}}>
+            <div className="col-md-3">
+              <div className="row">
+                <p>Select Your Desired Indian State</p>
               </div>
-        <table>
-            <tr>  
-              <td>
-              
-              </td>
+              <div className="row" style={{ width:"100%"}}>
+            <Dropdown style={styleDDL} options={this.DropdownListVal()} onChange={this._onSelect.bind(this)} value={this.state.selectedState}  placeholder="Select Indian State"/>
+              </div>
+            </div>
+            <div className="col-md-9">
+            <CanvasJSChart options = {options} style={{position:"relative"}}/> 
+          </div>
+        </div>
+        <div className="styleCardsParent row" >
+          
+        <Card className="styleCards makeBlue">
             
-           <td>
-          
-          <Card
-             bg="secondary"> 
-                <Card.Header>{this.state.selectedStateData.statecode}</Card.Header>
-            <Card.Body>
-              <Card.Title> Total Cases </Card.Title>
-              <Card.Text>
-              {this.state.selectedStateData.confirmed}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          
-          </td>
-          <td>
-          
-          <Card
-             bg="warning"> 
                 <Card.Header>{this.state.selectedStateData.state}</Card.Header>
             <Card.Body>
-              <Card.Title> Active Cases</Card.Title>
+              <Card.Title>{this.state.selectedStateData.confirmed}  </Card.Title>
               <Card.Text>
-              {this.state.selectedStateData.active}
+              Total Cases
               </Card.Text>
             </Card.Body>
           </Card>
           
-          </td>
-          <td>
+        
           
-          <Card
-             bg="success"> 
+          <Card className="styleCards makeRed"> 
                 <Card.Header>{this.state.selectedStateData.state}</Card.Header>
             <Card.Body>
-              <Card.Title> Recovered Cases </Card.Title>
+              <Card.Title> {this.state.selectedStateData.active} </Card.Title>
               <Card.Text>
-              {this.state.selectedStateData.recovered}
+              Active Cases 
               </Card.Text>
             </Card.Body>
           </Card>
           
-          </td>
-          <td>
+          
+          
+          <Card className="styleCards makeGreen"> 
+                <Card.Header>{this.state.selectedStateData.state}</Card.Header>
+            <Card.Body>
+              <Card.Title> {this.state.selectedStateData.recovered} </Card.Title>
+              <Card.Text>
+              Recovered Cases
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          
+          
          
-          <Card
-             bg="danger"> 
+          <Card className="styleCards makeGrey"> 
                 <Card.Header>{this.state.selectedStateData.state}</Card.Header>
             <Card.Body>
-              <Card.Title> Deaths </Card.Title>
+              <Card.Title> {this.state.selectedStateData.deaths} </Card.Title>
               <Card.Text>
-              {this.state.selectedStateData.deaths}
+              Deaths
               </Card.Text>
             </Card.Body>
           </Card>
           
-          </td>
-         
-          </tr>
-          </table>
-          {/* </Jumbotron> */}
-        </Container >
+        </div >
+       </Container>
          : <p>Please wait While the data Loads...</p>
       
     );

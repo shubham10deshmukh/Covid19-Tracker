@@ -85,7 +85,7 @@ class IndiaGraph extends React.Component {
                 labelFontColor: "#6D78AD",
 				tickColor: "#6D78AD",
                 includeZero: true,
-                interval : 100
+               // interval : 500
 			},
 			toolTip: {
 				shared: true
@@ -132,7 +132,7 @@ class IndiaGraph extends React.Component {
 				labelFontColor: "#6D78AD",
 				tickColor: "#6D78AD",
                 includeZero: true,
-                interval : 5000
+              //  interval : 5000
 			},
 			toolTip: {
 				shared: true
