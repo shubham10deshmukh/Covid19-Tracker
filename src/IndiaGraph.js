@@ -68,7 +68,10 @@ class IndiaGraph extends React.Component {
             theme: "light2",
 			animationEnabled: true,
 			title:{
-				text: "Death Cases in India"
+                text: "DEATH CASES IN INDIA",
+                fontColor : "darkslategrey",
+                fontWeight: 750,
+                fontSize :30
 			},
 			axisX: {
                 title: "Date",
@@ -115,7 +118,11 @@ class IndiaGraph extends React.Component {
             theme: "light2",
 			animationEnabled: true,
 			title:{
-				text: "Positive Cases in India"
+                text: "POSITIVE CASES IN INDIA",
+                color: "darkslategrey",
+                fontWeight: 750,
+                fontSize :30
+                
 			},
 			axisX: {
                 title: "Date",

@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import './App.css';
+import Flexbox from 'flexbox-react';
 
 import CanvasJSReact from './canvasjs.react';
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -124,7 +125,10 @@ this.state = {
     const options = {
 			animationEnabled: true,
 			title: {
-				text: "Patients Condtion Ratio"
+        text: "",
+        color: "darkslategrey",
+        fontWeight: 750,
+        fontSize :30
       },
 			subtitles: [{
         text: this.state.selectedStateData.state,//"yValue % Positive",
@@ -135,7 +139,8 @@ this.state = {
 			data: [{
 				type: "doughnut",
 				showInLegend: true,
-				indexLabel: "{name}: {y}",
+        indexLabel: "{name}: {y}",
+        indexLabelPlacement: "outside",
         yValueFormatString: "###'%'",
 				dataPoints: [
           //{ color:"grey",name: "No Cases",visible : 'false', y:  confirmed == 0 ? 100 : 0},
@@ -152,11 +157,12 @@ this.state = {
           { 
           "position" : "relative",
           "width" : "100%",
-            "bottom": "0",
-            "left": "0",
+          "bottom": "0",
+          "left": "0",
           "border":"solid",
           "color": "rebeccapurple",
-          "font-weight": "900"
+          "font-weight": "900",
+          'margin-left':"0"
           
         }
       return (
@@ -164,19 +170,79 @@ this.state = {
         <Container style={{border:"solid 1px", paddingTop: "1%", paddingBottom: "1%",marginTop: "1%",}}>
 
         <div className="row" style={{ width:"inherit"}}>
-            <div className="col-md-3">
-              <div className="row">
-                <p>Select Your Desired Indian State</p>
+             <div className="col-md-1" style={{    flex: "0 0 4.333333%" , maxWidth: "4.333333%"}}>
+            </div> 
+            
+            <div className="col-md-3" >
+              <div className="row" style={{justifyContent: 'left'}}>
+                <p style={{ color: 'darkslategrey', fontWeight: 750, fontFamily: 'Exo 2', fontSize:'x-large'}}>Indian State</p>
               </div>
               <div className="row" style={{ width:"100%"}}>
-            <Dropdown style={styleDDL} options={this.DropdownListVal()} onChange={this._onSelect.bind(this)} value={this.state.selectedState}  placeholder="Select Indian State"/>
+            <Dropdown style={{styleDDL}} options={this.DropdownListVal()} onChange={this._onSelect.bind(this)} value={this.state.selectedState}  placeholder="All India"/>
               </div>
             </div>
-            <div className="col-md-9">
+            <div className="col-md-8" style={{marginBottom: '3%'}} >
             <CanvasJSChart options = {options} style={{position:"relative"}}/> 
-          </div>
+            </div>
+            
         </div>
-        <div className="styleCardsParent row" >
+       
+
+            <div class="band">
+                  
+                  
+                  <div class="item-1">
+                        <a  class="card makeBlue">
+                        <div class="thumb"></div>
+                          <div className="cardHeader"> {this.state.selectedStateData.state} </div>
+                          <article>
+                            <h1><h3>{this.state.selectedStateData.confirmed} </h3>  </h1>
+                            <span>Total Cases</span>
+                          </article>
+                        </a>
+                  </div>
+                    
+                 
+                  <div class="item-2">
+                  <a  class="card makeRed">
+                          <div class="thumb"></div>
+                          <div className="cardHeader"> {this.state.selectedStateData.state} </div>
+                          <article>
+                            <h1><h3>{this.state.selectedStateData.active} </h3>  </h1>
+                            <span>Active Cases</span>
+                          </article>
+                    </a>
+                  </div>
+                    
+                 
+                  <div class="item-3">
+                  <a  class="card makeGreen">
+                          <div class="thumb"></div>
+                          <div className="cardHeader"> {this.state.selectedStateData.state} </div>
+                          <article>
+                            <h1><h3>{this.state.selectedStateData.recovered} </h3>  </h1>
+                            <span>Recovered Cases</span>
+                          </article>
+                  </a>
+                  </div>
+
+                  <div class="item-3">
+                  <a  class="card makeGrey">
+                          <div class="thumb"></div>
+                          <div className="cardHeader"> {this.state.selectedStateData.state} </div>
+                          <article>
+                            <h1><h3>{this.state.selectedStateData.deaths} </h3>  </h1>
+                            <span>Deceased Cases</span>
+                          </article>
+                  </a>
+                  </div>
+                    
+            </div>
+
+       
+       {/* This was the old CARD layout */}
+        {/* <div className="styleCardsParent" >
+          
           
         <Card className="styleCards makeBlue">
             
@@ -225,7 +291,8 @@ this.state = {
             </Card.Body>
           </Card>
           
-        </div >
+        </div > */}
+        
        </Container>
          : <p>Please wait While the data Loads...</p>
       

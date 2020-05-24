@@ -105,15 +105,16 @@ class GlobalData extends React.Component {
                 },  
             ].map(c => ({ ...c, ...defaultColumnProperties }));
             
-           const worldRow = Object.assign({Country : "World" } , this.state.Globaldata);
+           var worldRow = Object.assign({Country : "World" } , this.state.Globaldata);
             //const countryDataSorted = Object.assign({TotalActive : (parseInt(this.state.Countrydata.TotalConfirmed) - parseInt(this.state.Countrydata.TotalDeaths) ) } , this.state.Countrydata);
             const rows = [ worldRow].concat( [].concat( this.state.Countrydata).sort((a, b) => a.TotalConfirmed < b.TotalConfirmed ? 1:-1))
             
+            worldRow = null;
 
            const i =0 ;
             return(
                 
-                this.state.isLoaded && this.state.Globaldata?   ( 
+                this.state.isLoaded && this.state.Globaldata!==null?   ( 
                     <DataGrid
                     
                     columns={columns}    

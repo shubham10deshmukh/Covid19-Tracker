@@ -97,11 +97,7 @@ class IndiaData extends React.Component {
             return(
                 
                  this.state.StateWisedata?   ( 
-                    <DataGrid
-                    columns={columns}    
-                   rows={rows}      
-                    
-                  />
+                    <DataGrid columns={columns} rows={rows} />
             ) : <p>Please Wait....</p> 
            
             );

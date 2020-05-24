@@ -36,10 +36,12 @@ function App() {
         );}
 
   return (
-    <div className="App">
+    <div className="App" >
       <ScrollingProvider>
 
-      <header className="App-header">
+     
+     
+      <header className="App-header" style={{display:'none'}}>
         <div className="row" style={{width:"100%"}}>
           <div className="col-md-3">
       <Section id={'Top'}>
@@ -101,7 +103,7 @@ function App() {
                     href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
                     target="_blank"
                     rel="noopener noreferrer">
-                    Visit WHO Guidelines for COVID-19
+                    WHO Guidelines for COVID-19
                   </a>
                   </div>
     
@@ -109,7 +111,7 @@ function App() {
           </div>
       </header>
      
-                <div className="header">  
+                <div className="header" name="header1" id="header1">  
                    <div className="logoContainer">
                         <h1>KILL<span> The COVID</span> </h1>
                   </div>
@@ -118,36 +120,71 @@ function App() {
                     href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
                     target="_blank"
                     rel="noopener noreferrer">
-                    Visit WHO Guidelines for COVID-19
+                    WHO Guidelines for COVID-19
                   </a>
                   </div>
                   <div className="innerHeader">
                      
                       <ul className="navigation">
                       
-                        <a><li>State Wise</li></a>
-                        <a><li>Visually</li></a>
-                        <a><li>India Tally</li></a>
-                        <a><li>Global Tally</li></a>
+                        <a><li>
+                              <SectionLink section="StateData" >
+                              {({ onClick, isSelected }) => (
+                                <div onClick={onClick} selected={isSelected} style={{fontFamily:'Exo 2'}}>
+                                  STATES
+                                </div>
+                              )}
+                            </SectionLink>
+                        </li></a>
+                        <a><li>
+                            <SectionLink section="Graph" >
+                              {({ onClick, isSelected }) => (
+                                <div onClick={onClick} selected={isSelected} style={{fontFamily:'Exo 2'}}>
+                                  TRENDS
+                                </div>
+                              )}
+                            </SectionLink> 
+                          </li></a>
+                        <a><li>
+                            <SectionLink section="IndiaTable" >
+                            {({ onClick, isSelected }) => (
+                              <div onClick={onClick} selected={isSelected} style={{fontFamily:'Exo 2'}}>
+                                INDIA
+                              </div>
+                            )}
+                          </SectionLink>  
+                        </li></a>
+                        <a><li>
+                            <SectionLink section="GlobalTable" >
+                              {({ onClick, isSelected }) => (
+                                <div onClick={onClick} selected={isSelected} style={{fontFamily:'Exo 2'}}>
+                                  GLOBAL
+                                </div>
+                              )}
+                            </SectionLink>  
+                        </li></a>
                       </ul>
                   </div>
                  
                 </div>
                 
      
-    <Section id={'StateData'}>
+      
+      <Section id={'StateData'}>
           <FetchURL />
       </Section>
       <Section id={'Graph'}>
-         <IndiaGraph/>
+          <IndiaGraph/> 
       </Section>
       <Section id={'IndiaTable'}>
-          <IndiaData/>
+      <div style={{margin:"2%"}}><h4  className="titleClass"> COVID-19 CASES IN INDIA </h4></div>
+           <IndiaData/> 
       </Section>
       <Section id={'GlobalTable'}>
-          <h4> Global Stastics for COVID-19 </h4>
-          <GlobalData/>
+          <div style={{margin:"2%"}}><h4  className="titleClass"> COVID-19 CASES IN THE WORLD </h4></div>
+           <GlobalData/> 
       </Section>
+      
 
 
       
