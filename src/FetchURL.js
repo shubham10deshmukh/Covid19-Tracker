@@ -64,14 +64,14 @@ this.state = {
   
 
  
-      DropdownListVal(){
-        if(this.state.items != [])
-        { 
-          return  this.optionsData();
-        }
-        else
-        return [  { value: 'MH', label: 'Maharashtra' },];
-      } 
+      // DropdownListVal(){
+      //   if(this.state.items != [])
+      //   { 
+      //     return  this.optionsData();
+      //   }
+      //   else
+      //   return [  { value: 'MH', label: 'Maharashtra' },];
+      // } 
 
       _onSelect(e){
        
@@ -91,7 +91,8 @@ this.state = {
       };
 
       optionsData(){
-          const chartItems = this.state.items.map((d) =>  {
+        var chartItems =0;  
+        chartItems = this.state.items.map((d) =>  {
             let chartdata = {value : d.statecode  , label:  d.state  }
             return chartdata; });
           return (chartItems);
@@ -167,19 +168,20 @@ this.state = {
         }
       return (
          this.state.selectedStateData != {} ?
-        <Container style={{border:"solid 1px", paddingTop: "1%", paddingBottom: "1%",marginTop: "1%",}}>
+         <Container style={{border:"solid 1px", paddingTop: "1%", paddingBottom: "1%",marginTop: "1%", width:'95%'}}>
 
         <div className="row" style={{ width:"inherit"}}>
              <div className="col-md-1" style={{    flex: "0 0 4.333333%" , maxWidth: "4.333333%"}}>
             </div> 
             
             <div className="col-md-3" >
-              <div className="row" style={{justifyContent: 'left'}}>
+              <div className="row" style={{justifyContent: 'left' , paddingLeft:"2%"}}>
                 <p style={{ color: 'darkslategrey', fontWeight: 750, fontFamily: 'Exo 2', fontSize:'x-large'}}>Indian State</p>
               </div>
-              <div className="row" style={{ width:"100%"}}>
-            <Dropdown style={{styleDDL}} options={this.DropdownListVal()} onChange={this._onSelect.bind(this)} value={this.state.selectedState}  placeholder="All India"/>
-              </div>
+              <div className="row" style={{ width:"100%" , paddingLeft:"2%"}}>
+            {this.optionsData() != 0 ?
+            <Dropdown style={{styleDDL}} options={this.optionsData()} onChange={this._onSelect.bind(this)} value={this.state.selectedState} placeholder="All India"/>
+            : "Loading.."}</div>
             </div>
             <div className="col-md-8" style={{marginBottom: '3%'}} >
             <CanvasJSChart options = {options} style={{position:"relative"}}/> 
@@ -293,7 +295,7 @@ this.state = {
           
         </div > */}
         
-       </Container>
+        </Container> 
          : <p>Please wait While the data Loads...</p>
       
     );

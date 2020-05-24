@@ -54,6 +54,10 @@ class IndiaData extends React.Component {
         } 
         render(){  
             
+            const defaultColumnProperties = {
+                resizable: true,
+                width: 'auto'
+              };
             
              const columns = [
                 {
@@ -90,14 +94,14 @@ class IndiaData extends React.Component {
                     key: 'deltarecovered',
                     name: 'Recovered Today'
                 },  
-            ];
+            ].map(c => ({ ...c, ...defaultColumnProperties }));;
             
              const rows = this.state.StateWisedata;
        
             return(
                 
                  this.state.StateWisedata?   ( 
-                    <DataGrid columns={columns} rows={rows} />
+                    <DataGrid columns={columns} rows={rows} enableCellAutoFocus={false}/>
             ) : <p>Please Wait....</p> 
            
             );

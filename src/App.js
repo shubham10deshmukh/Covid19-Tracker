@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import FetchURL from './FetchURL';
@@ -11,7 +11,9 @@ import { ScrollingProvider, SectionLink, Section } from 'react-scroll-section';
 
 
 
+
 function App() {
+
 
     const appTitle= "Kill The COVID";
     var responsive ={
@@ -111,18 +113,22 @@ function App() {
           </div>
       </header>
      
-                <div className="header" name="header1" id="header1">  
-                   <div className="logoContainer">
-                        <h1>KILL<span> The COVID</span> </h1>
-                  </div>
-                  <div className="linkContainer"> <a
-                    className="App-link"
-                    href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    WHO Guidelines for COVID-19
-                  </a>
-                  </div>
+     
+               
+               
+      <div className="header" name="header1" id="header1">  
+            <div className="logoContainer">
+                <h1>KILL<span> The COVID</span> </h1>
+          </div>
+          <div className="linkContainer"> 
+              <a
+                className="App-link"
+                href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
+                target="_blank"
+                rel="noopener noreferrer">
+                WHO Guidelines for COVID-19
+              </a>
+          </div>
                   <div className="innerHeader">
                      
                       <ul className="navigation">
@@ -178,11 +184,11 @@ function App() {
       </Section>
       <Section id={'IndiaTable'}>
       <div style={{margin:"2%"}}><h4  className="titleClass"> COVID-19 CASES IN INDIA </h4></div>
-           <IndiaData/> 
+            <IndiaData/>  
       </Section>
       <Section id={'GlobalTable'}>
           <div style={{margin:"2%"}}><h4  className="titleClass"> COVID-19 CASES IN THE WORLD </h4></div>
-           <GlobalData/> 
+         <GlobalData/> 
       </Section>
       
 
@@ -201,9 +207,11 @@ function App() {
  <p> Developed by Shubham Deshmukh | {logoInstagram()} | {logoFacebook()} | {logoLinkedin()} </p>
         </footer>
         </ScrollingProvider>
+      
     </div>
-  );
-}
 
+);
+
+}
 
 export default App;

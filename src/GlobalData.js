@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import DataGrid from 'react-data-grid';
 import 'react-data-grid/dist/react-data-grid.css';
@@ -14,6 +14,7 @@ class GlobalData extends React.Component {
         this.state = {
             isLoaded : false,
             error : null,
+            result: '',
             Globaldata : {},
             Countrydata : {}
            
@@ -33,6 +34,7 @@ class GlobalData extends React.Component {
         (result) => {
             this.setState({
             isLoaded: true,
+            DataCheck : result,
             Globaldata: result.Global,
             Countrydata : result.Countries
             });
@@ -52,7 +54,9 @@ class GlobalData extends React.Component {
         componentDidMount( ) {
 
             this.fetchGlobalData();
+           
         }
+        
         rowGetter(i) {
            // const worldRow = Object.assign({"Country" : "World" } , this.state.Globaldata);
         
@@ -72,7 +76,7 @@ class GlobalData extends React.Component {
             
             
             const defaultColumnProperties = {
-                sortable: true,
+                resizable: true,
                 width: 'auto'
               };
             
@@ -84,10 +88,9 @@ class GlobalData extends React.Component {
                 },             
                 {
                     key: 'TotalConfirmed',
-                    name: 'Total Confirmed',
-                   
+                    name: 'Total Confirmed',     
                 },
-              {
+                {
                 key: 'TotalDeaths',
                 name: 'Total Deaths'
                 }, 
@@ -105,18 +108,17 @@ class GlobalData extends React.Component {
                 },  
             ].map(c => ({ ...c, ...defaultColumnProperties }));
             
-           var worldRow = Object.assign({Country : "World" } , this.state.Globaldata);
-            //const countryDataSorted = Object.assign({TotalActive : (parseInt(this.state.Countrydata.TotalConfirmed) - parseInt(this.state.Countrydata.TotalDeaths) ) } , this.state.Countrydata);
-            const rows = [ worldRow].concat( [].concat( this.state.Countrydata).sort((a, b) => a.TotalConfirmed < b.TotalConfirmed ? 1:-1))
-            
-            worldRow = null;
-
-           const i =0 ;
+               const worldRow = Object.assign({Country : "World" } , this.state.Globaldata);
+        //    //const countryDataSorted = Object.assign({TotalActive : (parseInt(this.state.Countrydata.TotalConfirmed) - parseInt(this.state.Countrydata.TotalDeaths) ) } , this.state.Countrydata);
+             const rows = [ worldRow].concat( [].concat( this.state.Countrydata).sort((a, b) => a.TotalConfirmed < b.TotalConfirmed ? 1:-1))
+             
+         
+           const i = 'You have reached maximum request limit.'; 
             return(
                 
-                this.state.isLoaded && this.state.Globaldata!==null?   ( 
+                this.state.isLoaded && this.state.DataCheck!='You have reached maximum request limit.'?   ( 
                     <DataGrid
-                    
+                    enableCellAutoFocus={false}
                     columns={columns}    
                    rows={rows}      
                     

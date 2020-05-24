@@ -334,9 +334,23 @@ transition: all .1s ease-in;
   .navigation {
     display: none;
   }  
+  .rdg-header-row{
+    font-size: x-small !important;
+  }
+  .rdg{
+    font-size: smaller !important;
+  }
 }
 @media only screen and (min-width: 850px) {
   .navigation {
     display: block;
   }  
 }
+
+
+/* .rdg-cell:focus {
+  outline: none;
+}
+.rdg-selected {
+  border: none !important;
+} */
